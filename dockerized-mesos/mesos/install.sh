@@ -1,15 +1,14 @@
 #!/usr/bin/env bash
 set -e
+source /build/mesos/buildconfig
 set -x
 
-# Get the current list of required packages (this is used in the clean up
-# code to remove the temporary packages that are about to be installed).
-dpkg -l | grep ^ii | sed 's_  _\t_g' | cut -f 2 >/tmp/required.txt
+apt-get update -qq
 
 # Install temporary packages required for installing Mesos.
 apt-get -qy install software-properties-common # (for add-apt-repository)
 add-apt-repository ppa:george-edison55/cmake-3.x
-apt-get update -q
+apt-get update -qq
 apt-cache policy cmake
 apt-get -qy install \
   build-essential                         \
@@ -27,7 +26,25 @@ apt-get -qy install \
   python-setuptools                       \
   heimdal-clients                         \
   unzip                                   \
+  python                           \
+  python2.7                        \
+  python-protobuf                  \
+  libsasl2-modules-gssapi-heimdal  \
+  libcurl4-nss-dev                 \
+  libtool                          \
+  libapr1-dev                      \
+  libsvn-dev                       \
+  libsasl2-dev                     \
+  libgoogle-glog-dev               \
+  libboost-dev                     \
+  libprotobuf-dev                  \
+  wget                             \
+  libevent-dev                     \
+  libevent-openssl-2.0             \
+  libevent-pthreads-2.0            \
+  openssl                          \
   --no-install-recommends
+
 
 # Install the picojson headers
 wget https://raw.githubusercontent.com/kazuho/picojson/v1.3.0/picojson.h -O /usr/local/include/picojson.h

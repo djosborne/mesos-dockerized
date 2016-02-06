@@ -28,6 +28,4 @@ ENV HOME /root
 # images are built with the `--no-cache` flag.
 ENV MESOS_BRANCH 0.26.0
 ADD /dockerized-mesos/mesos /build/mesos/
-RUN /build/mesos/base.sh && \
-    /build/mesos/install.sh && \
-    /build/mesos/cleanup.sh
+RUN  /build/mesos/install.sh && /build/mesos/cleanup.sh
