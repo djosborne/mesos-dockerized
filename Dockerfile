@@ -14,11 +14,10 @@
 
 # For details and docs - see https://github.com/phusion/baseimage-docker#getting_started
 
-FROM ubuntu:14.04
+FROM ubuntu:14.04.2
 CMD ["/sbin/my_init"]
 
 ENV HOME /root
-
 ###############
 ##   Mesos   ##
 ###############
@@ -29,3 +28,5 @@ ENV HOME /root
 ENV MESOS_BRANCH 0.26.0
 ADD /dockerized-mesos/mesos /build/mesos/
 RUN  /build/mesos/install.sh && /build/mesos/cleanup.sh
+
+ADD runagent /root/runagent
