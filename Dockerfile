@@ -18,6 +18,7 @@ FROM ubuntu:14.04.2
 CMD ["/sbin/my_init"]
 
 ENV HOME /root
+ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/usr/local/lib
 ###############
 ##   Mesos   ##
 ###############
