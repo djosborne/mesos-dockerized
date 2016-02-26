@@ -14,7 +14,7 @@
 
 # For details and docs - see https://github.com/phusion/baseimage-docker#getting_started
 
-FROM ubuntu:14.04.2
+FROM ubuntu:14.04
 CMD ["/sbin/my_init"]
 
 ENV HOME /root
@@ -26,7 +26,9 @@ ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/usr/local/lib
 # Docker builds will cache the clone during first build. 
 # Changes made to Mesos upstream will not be included in subsequent builds unless
 # images are built with the `--no-cache` flag.
-ENV MESOS_BRANCH 0.27.0
+# If you're using a tag, this shouldn't be a problem, as tags
+# are not typically subject to change
+ARG MESOS_BRANCH=master
 ADD /dockerized-mesos/mesos /build/mesos/
 RUN  /build/mesos/install.sh && /build/mesos/cleanup.sh
 
